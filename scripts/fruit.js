@@ -16,7 +16,14 @@ var userInventory = {
   grapes: 0,
   grapesSpent: 0,
   oranges: 0,
-  orangesSpent: 0
+  orangesSpent: 0,
+  calcAvg: function(fruit){
+    if (userInventory[fruit] === 0) {
+      return 0;
+    } else {
+      return userInventory[fruit + "Spent"] / userInventory[fruit];
+    }
+  }
 };
 
 var timeInterval = 15000;
@@ -55,7 +62,15 @@ function recalcInventory(purchased){
 
 function displayInventoryToDOM(){
   console.log('in displayInventoryToDOM');
-
+  var outputString = "";
+  outputString += '<li>' + userInventory.apples + ' apples ($' + userInventory.calcAvg('apples') + ')</li>';
+  outputString += '<li>' + userInventory.bananas + ' bananas ($' + userInventory.calcAvg('bananas') + ')</li>';
+  outputString += '<li>' + userInventory.grapes + ' grapes ($' + userInventory.calcAvg('grapes') + ')</li>';
+  outputString += '<li>' + userInventory.oranges + ' oranges ($' + userInventory.calcAvg('oranges') + ')</li>';
+  $('#purchasedItems').html(outputString);
+  console.log(userInventory.money, toString(userInventory.money));
+  $('#moneyRemaining').html(userInventory.money);
+  $('#moneySpent').html(initWallet - userInventory.money);
 }
 
 });
