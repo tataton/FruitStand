@@ -1,10 +1,10 @@
 var prices = {
-  apples: 5,
-  bananas: 5,
-  grapes: 5,
-  oranges: 5
+  apples: 3.5,
+  bananas: 2.4,
+  grapes: 4.9,
+  oranges: 4.3
 };
-
+//toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 var initWallet = 100;
 
 var userInventory = {
@@ -19,9 +19,10 @@ var userInventory = {
   orangesSpent: 0,
   calcAvg: function(fruit){
     if (userInventory[fruit] === 0) {
-      return 0;
+      return "$0";
     } else {
-      return userInventory[fruit + "Spent"] / userInventory[fruit];
+      var output = userInventory[fruit + "Spent"] / userInventory[fruit];
+      return output.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
   }
 };
@@ -30,6 +31,9 @@ var timeInterval = 15000;
 
 $(document).ready(function(){
   console.log('js/jq sourced');
+  displayInventoryToDOM();
+  displayMarketPricesToDOM();
+
 
   setInterval(changePrices, timeInterval);
   //fires every 15 seconds
@@ -49,6 +53,19 @@ $(document).ready(function(){
 
   });
 
+
+
+function limitPrices(price){
+  console.log('in limitPrices');
+  if (price < .5){
+    return .5;
+  } else if (price > 9.99){
+    return 9.99;
+  } else {
+    return price;
+  }
+}
+
 function recalcInventory(purchased){
   console.log('in recalcInventory with', purchased);
 
@@ -62,15 +79,41 @@ function recalcInventory(purchased){
 
 function displayInventoryToDOM(){
   console.log('in displayInventoryToDOM');
-  var outputString = "";
-  outputString += '<li>' + userInventory.apples + ' apples ($' + userInventory.calcAvg('apples') + ')</li>';
-  outputString += '<li>' + userInventory.bananas + ' bananas ($' + userInventory.calcAvg('bananas') + ')</li>';
-  outputString += '<li>' + userInventory.grapes + ' grapes ($' + userInventory.calcAvg('grapes') + ')</li>';
-  outputString += '<li>' + userInventory.oranges + ' oranges ($' + userInventory.calcAvg('oranges') + ')</li>';
-  $('#purchasedItems').html(outputString);
-  console.log(userInventory.money, toString(userInventory.money));
-  $('#moneyRemaining').html(userInventory.money);
-  $('#moneySpent').html(initWallet - userInventory.money);
+  $('#applesNo').html(userInventory.apples);
+  $('#applesAve').html(userInventory.calcAvg('apples') );
+
+  $('#grapesNo').html(userInventory.grapes);
+  $('#grapesAve').html(userInventory.calcAvg('grapes') );
+
+  $('#bananasNo').html(userInventory.bananas);
+  $('#bananasAve').html(userInventory.calcAvg('bananas') );
+
+  $('#orangesNo').html(userInventory.oranges);
+  $('#orangesAve').html(userInventory.calcAvg('oranges') );
+
+  $('#moneyRemaining').html(userInventory.money.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+  var spent = initWallet - userInventory.money;
+  $('#moneySpent').html(spent.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
 }
+
+function displayMarketPricesToDOM(){
+  console.log('in displayMarketPricesToDOM');
+
+  $('#GrapePrice').html(prices.grapes.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+  $('#BananaPrice').html(prices.bananas.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+  $('#ApplePrice').html(prices.apples.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+  $('#OrangePrice').html(prices.oranges.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+}
+
+setInterval(function(){
+console.log('interval triggered');
+
+    prices.bananas = limitPrices( prices.bananas + (Math.floor((Math.random() * 2) + 1) -1.5) );
+    prices.apples = limitPrices( prices.apples + (Math.floor((Math.random() * 2) + 1) -1.5) );
+    prices.grapes = limitPrices( prices.grapes + (Math.floor((Math.random() * 2) + 1) -1.5) );
+    prices.oranges = limitPrices( prices.oranges + (Math.floor((Math.random() * 2) + 1) -1.5) );
+
+  displayMarketPricesToDOM();
+} , timeInterval);
 
 });
