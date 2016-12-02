@@ -9,6 +9,8 @@
       ul {list-style-type: none; margin: 20px 0 10px -2em; line-height: 30px;}
       botton {border-radius: 9px;}
       #header {text-align: center; font-size: 80px; margin-bottom: 50px;}
+      #finalMessage {background-color:#fcc218; color: white;}
+      footer {background-color: #dddddd; margin-top: 30px; padding: 15px 0 500px;}
       .jumbotron{ background-image: url('http://images6.fanpop.com/image/photos/35200000/Fruit-Punch-fruit-35252842-1440-900.jpg');}
 
     </style>
@@ -25,7 +27,13 @@
   </head>
   <body>
     <div class="jumbotron" ></div>
-    <div class="container">
+    <div class="container" id="finalMessage">
+      <h1 id="header" >Results</h1>
+
+      <h3>Total Money <span id="gainedOrLost"></span>: <span id="finalMoney"></span></h3>
+      <p style="margin-bottom: 25px;">(rest of the fruit in inventory sold)</p>
+    </div>
+    <div class="container" id="fruitsAndUserRows">
       <h1 id="header" >Fruit Stand</h1>
       <div class='row'>
         <div class="col-sm-1"></div>
@@ -70,7 +78,8 @@
   </div>
 </div>
   <footer>
-    <h1>Time: <span id='time'></span></h1>
+    <h1 style="margin-bottom: 15px;">Time: <span id='time'></span></h1>
+    <button class="btn btn-default" id="endGameButton">End Game Early</button>
   </footer>
   </body>
 </html>
