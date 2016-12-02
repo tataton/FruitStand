@@ -13,43 +13,41 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="scripts/fruit.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="jumbotron"><h1>Fruit Stand</h1></div>
+    <div class="jumbotron"></div>
     <div class="container">
+      <div class="page-header"><h1>Fruit Stand</h1></div>
       <div class='row'>
-        <div class="col-sm-4"></div>
 
-        <div class="col-sm-4">
-
-
-
-
-          <button id="GrapeButton" class="buyButton" name="grapes">Buy Grapes!</button>
-          <p id='GrapePrice'>100</p>
-          <button id="BananaButton" class="buyButton" name="bananas">Buy Bananas!</button>
-          <p id='BananaPrice'>100</p>
-          <button id="AppleButton" class="buyButton" name="apples">Buy Apples!</button>
-          <p id='ApplePrice'>1000</p>
-          <button id="OrangeButton" class="buyButton" name="oranges">Buy Oranges!</button>
-          <p id='OrangePrice'>10</p>
-
-
-
-
-
+        <div class="col-sm-6">
+          <div class="button">
+            <img src="https://cdn2.iconfinder.com/data/icons/bright-cafe/512/grapes-512.png">
+            <button id="GrapeButton" class="buyButton btn btn-success" name="grapes">Buy Grapes!</button><p id='GrapePrice'>100</p>
+            <img src="http://webdev.firetechcamp.com/Harry%20Price/images/banana-page-icon.png">
+            <button id="BananaButton" class="buyButton btn btn-success" name="bananas">Buy Bananas!</button>
+            <p id='BananaPrice'>100</p>
+            <img src="https://cdn3.iconfinder.com/data/icons/education-and-school/512/apple_fruit_food_diet_fitness_flat_icon-512.png">
+            <button id="AppleButton" class="buyButton btn btn-success" name="apples">Buy Apples!</button>
+            <p id='ApplePrice'>1000</p>
+            <img src="http://www.iconarchive.com/download/i76677/xenatt/the-circle/App-Orange-Player.ico">
+            <button id="OrangeButton" class="buyButton btn btn-success" name="oranges">Buy Oranges!</button>
+            <p id='OrangePrice'>10</p>
         </div>
+      </div>
 
-        <div class="col-sm-4">
-
-        <h3>Purchased Items</h3>
-        <ul id='purchasedItems'>        
+        <div class="col-sm-6">
+      <div class='well well-lg'>
+        <h3 class>Purchased Items</h3>
+        <ul id='purchasedItems'>
         </ul>
         <p id='moneySpent'>100</p>
         <p id='moneyRemaining'>0</p>
 
         </div>
   </div>
+</div>
 </div>
   </body>
 </html>

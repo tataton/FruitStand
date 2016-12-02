@@ -1,0 +1,32 @@
+
+.jumbotron {
+  background-image: url('http://images6.fanpop.com/image/photos/35200000/Fruit-Punch-fruit-35252842-1440-900.jpg');
+}
+
+.well {
+  text-align:center;
+}
+
+.page-header {
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+}
+
+.buyButton{
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  height: 75px;
+  weight: 75px;
+  margin: auto;
+
+}
