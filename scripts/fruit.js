@@ -30,15 +30,14 @@ var userInventory = {
 var fruitArray = ["apples", "bananas", "grapes", "oranges"];
 
 var timeInterval = 15000;
-var totalTime = [1,1];
-// var totalTime = [5,1];
+var totalTime = [5,1];
 // totalTime includes game time in minutes, and timer-second time in seconds.
 
 $(document).ready(function(){
   console.log('js/jq sourced');
   displayInventoryToDOM();
   displayMarketPricesToDOM();
-
+  $('#finalMessage').hide();
 
   $(document).on('click', '.buyButton', function(){
     // Event listener that fires when you push a buy button.
@@ -169,6 +168,18 @@ $(document).ready(function(){
       userInventory.money += finalSale;
     }
     displayInventoryToDOM();
+    $("#finalMessage").slideDown();
+    $("#fruitsAndUserRows").slideToggle();
+
+    var resultMoney = (initWallet - userInventory.money) * -1;
+    $('#gainedOrLost').html("Gained");
+    if(resultMoney < 0){
+      resultMoney *= -1;
+      $('#gainedOrLost').html("Lost");
+    }
+    $('#finalMoney').html(resultMoney.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+
+
   }
 
 });
