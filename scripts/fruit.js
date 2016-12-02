@@ -8,20 +8,25 @@ var prices = {
 var initWallet = 100;
 
 var userInventory = {
+  /* User data on fruit. Inventory values include current amount of money, current number of each fruit owned, total number of buy & sell transactions for each fruit (applesTrans, etc.), and total amount of money involved in transactions for each fruit (applesSpent, etc.). Also includes a function for calculating average transaction price. */
   money: initWallet,
   apples: 0,
   applesSpent: 0,
+  applesTrans: 0,
   bananas: 0,
   bananasSpent: 0,
+  bananasTrans: 0,
   grapes: 0,
   grapesSpent: 0,
+  grapesTrans: 0,
   oranges: 0,
   orangesSpent: 0,
+  orangesTrans: 0,
   calcAvg: function(fruit){
     if (userInventory[fruit] === 0) {
       return "$0";
     } else {
-      var output = userInventory[fruit + "Spent"] / userInventory[fruit];
+      var output = userInventory[fruit + "Spent"] / userInventory[fruit + 'Trans'];
       return output.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
   }
@@ -30,8 +35,7 @@ var userInventory = {
 var fruitArray = ["apples", "bananas", "grapes", "oranges"];
 
 var timeInterval = 15000;
-var totalTime = [1,1];
-// var totalTime = [5,1];
+var totalTime = [5,1];
 // totalTime includes game time in minutes, and timer-second time in seconds.
 
 $(document).ready(function(){
@@ -83,7 +87,8 @@ $(document).ready(function(){
   function sellInventory(sold){
     console.log('in sellInventory with', sold);
     userInventory[sold]--;
-    userInventory[sold + 'Spent'] -= prices[sold];
+    userInventory[sold + 'Trans']++;
+    userInventory[sold + 'Spent'] += prices[sold];
     userInventory.money += prices[sold];
 
 
@@ -93,6 +98,7 @@ $(document).ready(function(){
     console.log('in recalcInventory with', purchased);
 
     userInventory[purchased]++;
+    userInventory[purchased + 'Trans']++;
     console.log('You now have ' + userInventory[purchased] + ' of ' + purchased);
     userInventory[purchased + 'Spent'] += prices[purchased];
     console.log('item total spent| current price:', userInventory[purchased + 'Spent'], prices[purchased]);
