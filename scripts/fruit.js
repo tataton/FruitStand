@@ -70,7 +70,13 @@ $(document).ready(function(){
 
   $(document).on('click', '#endGameButton', function(){
     $('#time').html('GAME OVER!');
+
+    if ($(this).attr("name") == "reset"  ){
+      console.log("reset this joker!!!");
+      location.reload();
+    } else {
     endGame();
+    }
   });
 
   function limitPrices(price){
@@ -168,7 +174,7 @@ $(document).ready(function(){
   function endGame(){
     clearInterval(timerIDOne);
     clearInterval(timerIDTwo);
-    $('button').attr('disabled', 'true');
+    // $('button').attr('disabled', 'true');
     for (i = 0; i < fruitArray.length; i++) {
       finalSale = userInventory[fruitArray[i]] * prices[fruitArray[i]];
       console.log("Sell " + userInventory[fruitArray[i]] + " " + fruitArray[i] + " at $" + prices[fruitArray[i]] + " yields $" + finalSale + " profit!");
@@ -177,6 +183,8 @@ $(document).ready(function(){
     displayInventoryToDOM();
     $("#finalMessage").slideDown();
     $("#fruitsAndUserRows").slideToggle();
+    $("#endGameButton").html("Reset Game");
+    $("#endGameButton").attr("name", "reset");
 
     var resultMoney = (initWallet - userInventory.money) * -1;
     $('#gainedOrLost').html("Gained");
