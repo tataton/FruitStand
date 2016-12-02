@@ -158,12 +158,16 @@ $(document).ready(function(){
 
   var timerIDOne = setInterval(function(){
     // Updates prices every 15 seconds.
-  //  console.log('interval triggered');
+    //  console.log('interval triggered');
 
-      prices.bananas = limitPrices( prices.bananas + (Math.floor((Math.random() * 2) + 1) -1.5) );
-      prices.apples = limitPrices( prices.apples + (Math.floor((Math.random() * 2) + 1) -1.5) );
-      prices.grapes = limitPrices( prices.grapes + (Math.floor((Math.random() * 2) + 1) -1.5) );
-      prices.oranges = limitPrices( prices.oranges + (Math.floor((Math.random() * 2) + 1) -1.5) );
+      console.log((Math.random() - .5));
+
+      // Modifies each price by a random value between +0.5 and -0.5.
+
+      prices.bananas = limitPrices( prices.bananas + Math.random() - 0.5 );
+      prices.apples = limitPrices( prices.apples + Math.random() - 0.5 );
+      prices.grapes = limitPrices( prices.grapes + Math.random() - 0.5 );
+      prices.oranges = limitPrices( prices.oranges + Math.random() - 0.5 );
 
     displayMarketPricesToDOM();
   } , timeInterval);
