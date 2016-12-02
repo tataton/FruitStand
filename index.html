@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <title>Fruit Stand</title>
     <style media="screen">
-      body {text-align: center; }
+      body {text-align: center;}
       img { width: auto; height:100px;}
       ul {list-style-type: none; margin: 20px 0 10px -2em; line-height: 30px;}
       botton {border-radius: 9px;}
+      #header {text-align: center; font-size: 80px; margin-bottom: 50px;}
+      .jumbotron{ background-image: url('http://images6.fanpop.com/image/photos/35200000/Fruit-Punch-fruit-35252842-1440-900.jpg');}
 
     </style>
     <script src="scripts/vendors/jquery-3.1.1.min.js" charset="utf-8"></script>
@@ -22,42 +24,43 @@
     <script src="scripts/fruit.js" charset="utf-8"></script>
   </head>
   <body>
-    <div class="jumbotron" ><h1>Fruit Stand</h1></div>
+    <div class="jumbotron" ></div>
     <div class="container">
+      <h1 id="header" >Fruit Stand</h1>
       <div class='row'>
         <div class="col-sm-1"></div>
         <div class="col-sm-2">
           <img src="http://divineflavor.com/wp-content/uploads/2014/05/GrapeRedSeedless.png" alt="Grapes">
           <h3 id='GrapePrice'></h3>
-          <button id="GrapeButton" class="buyButton btn-success" name="grapes">Buy Grapes!</button>
+          <button id="GrapeButton" class="buyButton btn btn-success" name="grapes">Buy Grapes!</button>
         </div>
 
         <div class="col-sm-2">
           <img src="https://usatftw.files.wordpress.com/2015/10/sleep-banana.jpg?w=1000&h=666" alt="Bananas">
           <h3 id='BananaPrice'></h3>
-          <button id="BananaButton" class="buyButton btn-success" name="bananas">Buy Bananas!</button>
+          <button id="BananaButton" class="buyButton btn btn-success" name="bananas">Buy Bananas!</button>
         </div>
 
         <div class="col-sm-2">
           <img src="https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg" alt="Apples">
           <h3 id='ApplePrice'></h3>
-          <button id="AppleButton" class="buyButton btn-success" name="apples">Buy Apples!</button>
+          <button id="AppleButton" class="buyButton btn btn-success" name="apples">Buy Apples!</button>
         </div>
 
         <div class="col-sm-2">
           <img src="http://shushi168.com/data/out/172/37794053-orange-images.png" alt="Oranges">
           <h3 id='OrangePrice'></h3>
-          <button id="OrangeButton" class="buyButton btn-success" name="oranges">Buy Oranges!</button>
+          <button id="OrangeButton" class="buyButton btn btn-success" name="oranges">Buy Oranges!</button>
         </div>
 
         <div class="col-sm-3" style="border: 2px solid black;">
 
         <h3>Purchased Items</h3>
         <ul id='purchasedItems'>
-          <li><strong id='grapesNo' ></strong> grapes (avg pr. = <span id='grapesAve'></span>)  <button class="sellButton btn-danger btn-xs" name="grapes">sell</button></li>
-          <li><strong id='bananasNo' ></strong> bananas (avg pr. = <span id='bananasAve'></span>)  <button class="sellButton btn-danger btn-xs" name="bananas">sell</button></li>
-          <li><strong id='applesNo' ></strong> apples (avg pr. = <span id='applesAve'></span>)  <button class="sellButton btn-danger btn-xs" name="apples">sell</button></li>
-          <li><strong id='orangesNo' ></strong> oranges (avg pr. = <span id='orangesAve'></span>)  <button class="sellButton btn-danger btn-xs" name="oranges">sell</button></li>
+          <li><strong id='grapesNo' ></strong> grapes (avg pr. = <span id='grapesAve'></span>)  <button class="sellButton btn btn-danger btn-xs" name="grapes">sell</button></li>
+          <li><strong id='bananasNo' ></strong> bananas (avg pr. = <span id='bananasAve'></span>)  <button class="sellButton btn btn-danger btn-xs" name="bananas">sell</button></li>
+          <li><strong id='applesNo' ></strong> apples (avg pr. = <span id='applesAve'></span>)  <button class="sellButton btn btn-danger btn-xs" name="apples">sell</button></li>
+          <li><strong id='orangesNo' ></strong> oranges (avg pr. = <span id='orangesAve'></span>)  <button class="sellButton btn btn-danger btn-xs" name="oranges">sell</button></li>
         </ul>
         <p style="border-bottom: 2px solid black; padding-bottom: 10px;">Money <span id='spendOrMade'></span>: <span id='moneySpent'></span></p>
         <p><strong>Money Left: <span id='moneyRemaining'>Money Left: </span></strong></p>
