@@ -23,6 +23,7 @@ var userInventory = {
   orangesSpent: 0,
   orangesTrans: 0,
   calcAvg: function(fruit){
+    // Calculates the average transaction price for fruit purchases and sales.
     if (userInventory[fruit] === 0) {
       return "$0";
     } else {
@@ -35,11 +36,14 @@ var userInventory = {
 var fruitArray = ["apples", "bananas", "grapes", "oranges"];
 
 var timeInterval = 15000;
+// Time interval for prices to change, in milliseconds.
+
 var totalTime = [5,1];
-// totalTime includes game time in minutes, and timer-second time in seconds.
+/* Variable totalTime includes total game time in minutes, and timer-second
+time in seconds. */
 
 $(document).ready(function(){
-  console.log('js/jq sourced');
+//  console.log('js/jq sourced');
   displayInventoryToDOM();
   displayMarketPricesToDOM();
   $('#finalMessage').hide();
@@ -47,7 +51,7 @@ $(document).ready(function(){
   $(document).on('click', '.buyButton', function(){
     // Event listener that fires when you push a buy button.
     var purchased = $(this).attr('name');
-    console.log("You pressed:", purchased);
+//    console.log("You pressed:", purchased);
 
     if ( 0 < (userInventory.money - prices[purchased]) ) {
     recalcInventory(purchased);
@@ -57,9 +61,9 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.sellButton', function(){
-    // Event listener that fires when you push a buy button.
+    // Event listener that fires when you push a sell button.
     var sold = $(this).attr('name');
-    console.log("You sold:", sold);
+//    console.log("You sold:", sold);
 
     if ( 0 !== userInventory[sold] ) {
     sellInventory(sold);
@@ -69,10 +73,13 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#endGameButton', function(){
+    /* Event listener that fires when you push the "End Game" button.
+    This button also is converted into a "Reset Game" button at the end,
+    and triggers page reload if pressed after the game is over.*/
     $('#time').html('GAME OVER!');
 
     if ($(this).attr("name") == "reset"  ){
-      console.log("reset this joker!!!");
+  //    console.log("reset this joker!!!");
       location.reload();
     } else {
     endGame();
@@ -80,6 +87,7 @@ $(document).ready(function(){
   });
 
   function limitPrices(price){
+    // Prevents sale prices from increasing above $9.99 or below $0.50.
     // console.log('in limitPrices');
     if (price < 0.5){
       return 0.5;
@@ -91,7 +99,8 @@ $(document).ready(function(){
   }
 
   function sellInventory(sold){
-    console.log('in sellInventory with', sold);
+    // Called by sell button event handler.
+  //  console.log('in sellInventory with', sold);
     userInventory[sold]--;
     userInventory[sold + 'Trans']++;
     userInventory[sold + 'Spent'] += prices[sold];
@@ -101,15 +110,16 @@ $(document).ready(function(){
   }
 
   function recalcInventory(purchased){
-    console.log('in recalcInventory with', purchased);
+    // Called by buy button event handler.
+//    console.log('in recalcInventory with', purchased);
 
     userInventory[purchased]++;
     userInventory[purchased + 'Trans']++;
-    console.log('You now have ' + userInventory[purchased] + ' of ' + purchased);
+//    console.log('You now have ' + userInventory[purchased] + ' of ' + purchased);
     userInventory[purchased + 'Spent'] += prices[purchased];
-    console.log('item total spent| current price:', userInventory[purchased + 'Spent'], prices[purchased]);
+//    console.log('item total spent| current price:', userInventory[purchased + 'Spent'], prices[purchased]);
     userInventory.money -= prices[purchased];
-    console.log('You have this much left: $' + userInventory.money);
+//    console.log('You have this much left: $' + userInventory.money);
   }
 
   function displayInventoryToDOM(){
@@ -138,7 +148,7 @@ $(document).ready(function(){
   }
 
   function displayMarketPricesToDOM(){
-    console.log('in displayMarketPricesToDOM');
+//    console.log('in displayMarketPricesToDOM');
 
     $('#GrapePrice').html(prices.grapes.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
     $('#BananaPrice').html(prices.bananas.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
@@ -147,7 +157,8 @@ $(document).ready(function(){
   }
 
   var timerIDOne = setInterval(function(){
-    console.log('interval triggered');
+    // Updates prices every 15 seconds.
+  //  console.log('interval triggered');
 
       prices.bananas = limitPrices( prices.bananas + (Math.floor((Math.random() * 2) + 1) -1.5) );
       prices.apples = limitPrices( prices.apples + (Math.floor((Math.random() * 2) + 1) -1.5) );
@@ -158,6 +169,7 @@ $(document).ready(function(){
   } , timeInterval);
 
   var timerIDTwo = setInterval(function(){
+    // Updates visible game timer.
     totalTime[1]--;
     if (totalTime[1] < 0){
       totalTime[0]--;
@@ -177,7 +189,7 @@ $(document).ready(function(){
     // $('button').attr('disabled', 'true');
     for (i = 0; i < fruitArray.length; i++) {
       finalSale = userInventory[fruitArray[i]] * prices[fruitArray[i]];
-      console.log("Sell " + userInventory[fruitArray[i]] + " " + fruitArray[i] + " at $" + prices[fruitArray[i]] + " yields $" + finalSale + " profit!");
+//      console.log("Sell " + userInventory[fruitArray[i]] + " " + fruitArray[i] + " at $" + prices[fruitArray[i]] + " yields $" + finalSale + " profit!");
       userInventory.money += finalSale;
     }
     displayInventoryToDOM();
