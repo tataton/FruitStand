@@ -28,6 +28,7 @@ var userInventory = {
 };
 
 var timeInterval = 15000;
+var totalTime = [5,1];
 
 $(document).ready(function(){
   console.log('js/jq sourced');
@@ -35,28 +36,32 @@ $(document).ready(function(){
   displayMarketPricesToDOM();
 
 
-  setInterval(changePrices, timeInterval);
-  //fires every 15 seconds
-
-  function changePrices() {
-    //changes fruit prices every 15 seconds
-
-  }
-
   $(document).on('click', '.buyButton', function(){
     // Event listener that fires when you push a buy button.
     var purchased = $(this).attr('name');
     console.log("You pressed:", purchased);
+
+    if ( 0 < (userInventory.money - prices[purchased]) ) {
     recalcInventory(purchased);
     displayInventoryToDOM();
-
+    }
 
   });
 
+  $(document).on('click', '.sellButton', function(){
+    // Event listener that fires when you push a buy button.
+    var sold = $(this).attr('name');
+    console.log("You sold:", sold);
 
+    if ( 0 !== userInventory[sold] ) {
+    sellInventory(sold);
+    displayInventoryToDOM();
+    }
+
+  });
 
 function limitPrices(price){
-  console.log('in limitPrices');
+  // console.log('in limitPrices');
   if (price < .5){
     return .5;
   } else if (price > 9.99){
@@ -64,6 +69,15 @@ function limitPrices(price){
   } else {
     return price;
   }
+}
+
+function sellInventory(sold){
+  console.log('in sellInventory with', sold);
+  userInventory[sold]--;
+  userInventory[sold + 'Spent'] -= prices[sold];
+  userInventory.money += prices[sold];
+
+
 }
 
 function recalcInventory(purchased){
@@ -93,7 +107,13 @@ function displayInventoryToDOM(){
 
   $('#moneyRemaining').html(userInventory.money.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
   var spent = initWallet - userInventory.money;
+  $('#spendOrMade').html("Spent");
+  if(spent < 0){
+    spent *= -1;
+    $('#spendOrMade').html("Made");
+  }
   $('#moneySpent').html(spent.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );
+
 }
 
 function displayMarketPricesToDOM(){
@@ -106,7 +126,7 @@ function displayMarketPricesToDOM(){
 }
 
 setInterval(function(){
-console.log('interval triggered');
+  console.log('interval triggered');
 
     prices.bananas = limitPrices( prices.bananas + (Math.floor((Math.random() * 2) + 1) -1.5) );
     prices.apples = limitPrices( prices.apples + (Math.floor((Math.random() * 2) + 1) -1.5) );
@@ -115,5 +135,18 @@ console.log('interval triggered');
 
   displayMarketPricesToDOM();
 } , timeInterval);
+
+setInterval(function(){
+  totalTime[1]--;
+  if (totalTime[1] < 0){
+    totalTime[0]--;
+    totalTime[1]=59;
+  }
+  var htmlString = totalTime[0] + 'm:' + totalTime[1] + 's'
+  if (totalTime[0]<0){
+    htmlString = 'TIME IS UP!!';
+  }
+  $('#time').html(htmlString);
+}, 1000);
 
 });

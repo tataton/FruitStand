@@ -6,7 +6,8 @@
     <style media="screen">
       body {text-align: center; }
       img { width: auto; height:100px;}
-      ul {list-style-type: none; margin-left: -2em}
+      ul {list-style-type: none; margin: 20px 0 10px -2em; line-height: 30px;}
+      botton {border-radius: 9px;}
 
     </style>
     <script src="scripts/vendors/jquery-3.1.1.min.js" charset="utf-8"></script>
@@ -53,17 +54,20 @@
 
         <h3>Purchased Items</h3>
         <ul id='purchasedItems'>
-          <li><strong id='grapesNo' ></strong> grapes (avg pr. = <span id='grapesAve'></span>)<button class="btn-alert" name="grapes">sell</button></li>
-          <li><strong id='bananasNo' ></strong> bananas (avg pr. = <span id='bananasAve'></span>)<button class="btn-alert" name="bananas">sell</button></li>
-          <li><strong id='applesNo' ></strong> apples (avg pr. = <span id='applesAve'></span>)<button class="btn-alert" name="apples">sell</button></li>
-          <li><strong id='orangesNo' ></strong> oranges (avg pr. = <span id='orangesAve'></span>)<button class="btn-alert" name="oranges">sell</button></li>
+          <li><strong id='grapesNo' ></strong> grapes (avg pr. = <span id='grapesAve'></span>)  <button class="sellButton btn-danger btn-xs" name="grapes">sell</button></li>
+          <li><strong id='bananasNo' ></strong> bananas (avg pr. = <span id='bananasAve'></span>)  <button class="sellButton btn-danger btn-xs" name="bananas">sell</button></li>
+          <li><strong id='applesNo' ></strong> apples (avg pr. = <span id='applesAve'></span>)  <button class="sellButton btn-danger btn-xs" name="apples">sell</button></li>
+          <li><strong id='orangesNo' ></strong> oranges (avg pr. = <span id='orangesAve'></span>)  <button class="sellButton btn-danger btn-xs" name="oranges">sell</button></li>
         </ul>
-        <p style="border-bottom: 2px solid black; padding-bottom: 10px;">Money Spent: <span id='moneySpent'></span></p>
+        <p style="border-bottom: 2px solid black; padding-bottom: 10px;">Money <span id='spendOrMade'></span>: <span id='moneySpent'></span></p>
         <p><strong>Money Left: <span id='moneyRemaining'>Money Left: </span></strong></p>
 
         </div>
         <div class="col-sm-1"></div>
   </div>
 </div>
+  <footer>
+    <h1>Time: <span id='time'></span></h1>
+  </footer>
   </body>
 </html>
